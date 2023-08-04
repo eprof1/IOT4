@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Fun With Raspberry Pi</title>
+
+    <style type="text/css">
+        .auto-style1 {
+            font-size: x-large;
+        }
+    </style>
+
+</head>
+<body>
+
+    <p>
+        Raspberry Pi Buster, Setup and Magic Mirror
+    </p>
+    <h1>
+        FormativePi01 Start</h1>
+    <p>
+        Follow these instructions to install the Raspbian Buster operating system, and the Magic Mirror software onto a Raspberry Pi 3 B+
+        (does MagicMirror work on Buster yet?)</p>
+    <p>
+        1. Go to <a href="https://www.raspberrypi.org/products/raspberry-pi-3-model-b-plus/">https://www.raspberrypi.org/products/raspberry-pi-3-model-b-plus/</a> and review the latest instructions.
+    </p>
+    <p>
+        2. Go to <a href="https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up/2">https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up/2</a> and review the instructions for part you will need:
+    </p>
+    <p>
+        a. Raspberry Pi 3 B+
+    </p>
+    <p>
+        b. Power Supply (5V, 2.4A)
+    </p>
+    <p>
+        c. Micro SD card and adapter (16 or 32GB)
+    </p>
+    <p>
+        d. Keyboard and mouse
+    </p>
+    <p>
+        e. HDMI cable
+    </p>
+    <p>
+        f.&nbsp; Network cable
+    </p>
+    <p>
+        3. Download the full version of Raspbian Buster with Desktop (1.1GB zip file), from: <a href="https://www.raspberrypi.org/downloads/raspbian/">https://www.raspberrypi.org/downloads/raspbian/</a>
+    </p>
+    <p>
+        4. Download Etcher, a tool to setup your Micro SD card, from: <a href="https://www.balena.io/etcher/">https://www.balena.io/etcher/</a>
+        
+    </p>
+    <p>
+        5. Install the Raspbian Operating System on your Micro SD card (may need adapter) using Etcher.
+    </p>
+    <p>
+        6. Insert your Micro SD card
+    </p>
+    <p>
+        7. Per instructions at:&nbsp; <a href="https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up/4">https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up/4</a> &nbsp;Connect your:
+    </p>
+    <p>
+        a. Keyboard
+    </p>
+    <p>
+        b. Mouse
+    </p>
+    <p>
+        c. Network cable
+    </p>
+    <p>
+        d. HDMI cable
+    </p>
+    <p>
+        8. Plug in the Power Supply and startup your Pi.<br />
+        ref: <a href="https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up/5">https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up/5</a>        
+    </p>
+    <p>
+        connect to WSU Guest wireless, setup an account (do NOT use warrior or wazoo wireless!)</p>
+    <p>
+        install Scrot to take screen shots</p>
+    <p>
+        log into your course home page at classes.winona.edu and take a screen shot of it from Raspberry pi</p>
+    <p>
+        upload screen shot to course D2L Assignment folder &#39;FormativePi01&#39;</p>
+    <h1>
+        FormativePi01 Stop</h1>
+
+    <hr />
+    Did it start?
+    <hr />
+
+    <h1>
+        SummativePi01 start</h1>
+    <p>
+        1. Finish configuration.<br />
+        ref: <a href="https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up/6">https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up/6</a>
+        <br />
+        Write down your ip address (lower right corner of first screen)<br />
+        Set Country, Language, Time Zone and check to use US keyboard<br />
+        Set and Write down your password<br />
+        Restart your Raspberry Pi<br />
+        Start&gt;Preferences&gt;Raspberry Pi Configuration<br />
+        On &#39;Interfaces&#39; tab enable &#39;SSH&#39; and &#39;VNC&#39;<br />
+        Enable ssh connection (remote access via Putty)<br />
+        Enable VNC (remote access using RealVNC)</p>
+    <h1>
+        SummativePi01 stop</h1>
+    <p>
+        <br />
+
+    </p>
+
+    <p>
+        2?.&nbsp;&nbsp; Install Magic Mirror software by opening a terminal window and executing the command: </p>
+    <p>
+        <code>bash -c "$(curl -sL https://raw.githubusercontent.com/MichMich/MagicMirror/master/installers/raspberry.sh)"</code>
+    </p>
+    <p>
+        11. Configure the Magic Mirror-set it to Auto Start by adding startup script found at the &quot;Make a MagicMirror start script.&quot; section found at:</p>
+    <p>
+        <a href="https://github.com/MichMich/MagicMirror/wiki/Auto-Starting-MagicMirror">https://github.com/MichMich/MagicMirror/wiki/Auto-Starting-MagicMirror</a>
+
+    </p>
+
+    <p>
+        12. Configure the MagicMirror to use OpenGL and rotate the screen (optional)<br />
+        ref: 
+    <a href="https://github.com/MichMich/MagicMirror/wiki/Configuring-the-Raspberry-Pi">https://github.com/MichMich/MagicMirror/wiki/Configuring-the-Raspberry-Pi</a> 
+    </p>
+
+    <p>
+        13. Connect to the Raspberry Pi using Putty<br />
+        ref: <a href="https://www.putty.org/" target="_blank">https://www.putty.org/</a>
+    </p>
+
+    <p>
+        14. Connect to the Raspberry Pi using VNC Viewer<br />
+        ref: <a href="https://www.realvnc.com/en/connect/download/viewer/" target="_blank">https://www.realvnc.com/en/connect/download/viewer/</a>
+    </p>
+
+    <p>
+        15. Update or change the compliments module<br />
+        ref: 
+    <a href="https://github.com/MichMich/MagicMirror/tree/develop/modules/default/compliments">https://github.com/MichMich/MagicMirror/tree/develop/modules/default/compliments</a> 
+    </p>
+
+    <p>
+        16. Rotate the Raspberry Pi screen from landscape to portrait<br />
+        <code>sudo nano /boot/config.txt<br />
+            display_hdmi_rotate=1<br />
+            sudo reboot
+        </code><br />
+        Note that the value of display_hdmi_rotate will be either 1 or 3 for portrait mode.
+
+    </p>
+    <p>
+        17. Add the Arduino IDE to the Raspberry Pi<br />
+        <code>sudo apt-get install arduino</code><br />
+        The Arduino IDE will now appear under Start>Programming>Arduino
+    </p>
+    <p>
+        18. Add the mu (micro Python) editor to the Raspberry Pi for programming the micro:bit<br />
+        <code>sudo apt-get install mu -y</code>
+    </p>
+
+</body>
+</html>
