@@ -157,10 +157,16 @@
                 1. make sure you can collect DHT data from Raspberry Pi
             </p>
             <p>
-                2. make sure you can write data to MySQL database
+                2. make sure you can write data to MySQL database<br />
+                You may need to install the Python mysql library using the command:<br />
+                <code>sudo pip3 install mysql-connector-python</code>
             </p>
             <p>
-                3. make sure you can read data from MySQL database-both throught CLI on RPi/MySQL and Microsoft Access via ODBC to MySQL
+                3. make sure you can read data from MySQL database-both throught CLI on RPi/MySQL and Microsoft Access via ODBC to MySQL<br />
+                You may need to create the MySQL database 'sensor' and create the 'dht' table using the 'dht.sql' file<br />
+                run the following command in MySQL, once you transfer 'dht.sql' to the 'IoT_Files' folder on the Raspberry Pi:<br />
+                <code>source /home/pi/Desktop/IoT_Files/dht.sql</code>
+
             </p>
             <p>
                 &nbsp;
