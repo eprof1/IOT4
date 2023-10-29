@@ -122,7 +122,7 @@
             You must be using a Raspberry Pi that has the following installed and configured:<br />
 
             <ol>
-                <li>Maria/MySQL database</li>
+                <li>Maria/MySQL database (using mariadb, so install required mariadb connector</li>
                 <li>phpMyAdmin</li>
                 <li>GrovePi, Raspberry Pi with DHT11 temperature and humidity sensor</li>
             </ol>
@@ -159,11 +159,11 @@
             <p>
                 2. make sure you can write data to MySQL database<br />
                 You may need to install the Python mysql library using the command:<br />
-                <code>sudo pip3 install mysql-connector-python</code>
+                <code>sudo pip3 install mariadb==1.0.11</code>
             </p>
             <p>
-                3. make sure you can read data from MySQL database-both throught CLI on RPi/MySQL and Microsoft Access via ODBC to MySQL<br />
-                You may need to create the MySQL database 'sensor' and create the 'dht' table using the 'dht.sql' file<br />
+                3. make sure you can read data from mariad database-both throught CLI on RPi/MySQL and Microsoft Access via ODBC to MySQL<br />
+                You may need to create the MySQL/mariadb database 'sensor' and create the 'dht' table using the 'dht.sql' file<br />
                 run the following command in MySQL, once you transfer 'dht.sql' to the 'IoT_Files' folder on the Raspberry Pi:<br />
                 <code>source /home/pi/Desktop/IoT_Files/dht.sql</code>
 
