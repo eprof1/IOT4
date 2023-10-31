@@ -161,6 +161,10 @@
                 2. make sure you can write data to MySQL database<br />
                 You may need to install the Python mysql library using the command:<br />
                 <code>sudo pip3 install mariadb==1.0.11</code>
+                <br />
+                You may need to install dependcies for mariadb using the command:<br />
+                <code>sudo apt install libmariadb3 libmariadb-dev
+</code>
             </p>
             <p>
                 3. make sure you can read data from mariad database-both throught CLI on RPi/MySQL and Microsoft Access via ODBC to MySQL<br />
@@ -263,7 +267,11 @@
                 <li>Type the following command in MySQL to mount the sensor database:
                     <br />
                     <code>use sensor;
-                    </code>
+                    </code> 
+                    <br />
+                    If database sensor does not exist use phpmyadmin to create the database using Collation = 'utf8mb4_general_ci'
+                    <br />
+
 
                 </li>
 
@@ -274,6 +282,12 @@
 
                     <a href="images/sensorData.PNG" class="img-responsive img-rounded" target="popup" onclick="window.open('images/sensorData.PNG', 'popup'); return false;">
                         <img src="images/sensorData.PNG" width="300" alt="sensor data" class="img-responsive img-responsive" /></a> MySQL Sensor Data<br />
+                    <br />
+                    Note: if table 'dht' does not exist use place the file 'dht.sql' into the RPi /home/pi/Desktop/IoT_Files folder and run the following command in mySQL: <br />
+                    <code>
+                        SOURCE /home/pi/Desktop/IoT_Files/dht.sql
+                    </code>
+                    <br />
 
 
                 </li>
