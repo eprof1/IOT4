@@ -7,36 +7,30 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <script>
+	<!-- PgP 7/11/2019 summative assignment for Raspberry Pi, Arduino Uno, micro:bit -->
+	<!-- Bootstrap -->
+	<link href="../../ReadOnly/bootstrap.css" rel="stylesheet">
 
-function copy_code(event) {
-    event.preventDefault();
-    
-    // Get the <pre> element containing the code
-    const preElement = event.target.parentElement.querySelector('pre');
-    
-    // Check if <pre> element exists
-    if (preElement) {
-        // Get the code within <pre> element
-        const codeText = preElement.innerText.trim();
-        
-        // Create a temporary textarea element to copy the code
-        const el = document.createElement("textarea");
-        el.value = codeText;
-        el.setAttribute("readonly", "");
-        el.style.position = "absolute";
-        el.style.left = '-9999px';
-        document.body.appendChild(el);
-        el.select();
-        document.execCommand("copy");
-        document.body.removeChild(el);
-        
-        // Optional: Provide some visual feedback that the code is copied
-        alert("Code copied to clipboard!");
-    } else {
-        alert("No code found to copy!");
-    }
-};
+	<!-- constant file for student firstname, lastname, starid on students' pages -->
+	<script src="../constants.js"></script>
+
+	<!-- course constant file that contains semester, class, section pages -->
+	<script src="../../ReadOnly/CourseConstants.js"></script>
+
+    <script>
+        function copy_text(event) {
+            event.preventDefault();
+            const str = event.target.previousElementSibling.innerText;
+            const el = document.createElement("textarea");
+            el.value = str;
+            el.setAttribute("readonly", "");
+            el.style.position = "absolute";
+            el.style.left = '-9999px';
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand("copy");
+            document.body.removeChild(el);
+        };
     </script>
 
 
@@ -162,14 +156,15 @@ function copy_code(event) {
 
 
 
-<div id="pcode">
-
-    <br /><br />
-    <button onclick="copy_code(event)">Copy Python Code</button>
-    <br /><br />
 
 
-<pre> <code>
+
+    <button onclick="copy_text(event)">Copy Code</button>
+
+
+<pre>
+
+<code>
 
 #PgP 2/10/2024 chatGPT API call from PiMyLifeUp article
 # https://pimylifeup.com/raspberry-pi-chatgpt/
@@ -224,10 +219,6 @@ while True:
 
 </code>
 </pre>
-
-
-</div>
-
 
 				</li>
 
@@ -530,8 +521,6 @@ while True:
 
 	</form>
 
-
-
 	<!-- Creative Commons License Info -->
 	<div id="xLicense" class=" col-lg-12 text-muted"></div>
 
@@ -543,15 +532,6 @@ while True:
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="../../ReadOnly/bootstrap.js"></script>
 
-	<!-- PgP 7/11/2019 summative assignment for Raspberry Pi, Arduino Uno, micro:bit -->
-	<!-- Bootstrap -->
-	<link href="../../ReadOnly/bootstrap.css" rel="stylesheet">
-
-	<!-- constant file for student firstname, lastname, starid on students' pages -->
-	<script src="../constants.js"></script>
-
-	<!-- course constant file that contains semester, class, section pages -->
-	<script src="../../ReadOnly/CourseConstants.js"></script>
 
 
 </body>
