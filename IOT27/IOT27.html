@@ -125,7 +125,7 @@ function copy_code(event) {
 
 
 			<p>
-				These instructions will show you how a Raspberry Pi can interact with the ChatGPT using an API-Applicaiton Programming Interface.
+				These instructions will show you how a Raspberry Pi can interact with the ChatGPT using an API-Application Programming Interface.
 			</p>
             <p>
 
@@ -143,7 +143,7 @@ function copy_code(event) {
            
 			<p>After completing this assignment you will be able to:</p>
 			<ol>
-				<li>Use a Raspberry Pi as a interface with a chatGPT instance </li>
+				<li>Use a Raspberry Pi to interface with a chatGPT instance </li>
 				<li>Learn how to keep your chatGPT API key safe</li>
 				<li>Discuss uses of Raspberry Pi as an AI tool</li>
 			</ol>
@@ -175,6 +175,32 @@ function copy_code(event) {
 		<div id="Exercise01" class="collapse in  col-lg-12">
 
 			<ol>
+
+				<li>
+					These steps are performed on your computer.
+				</li>
+
+				<li>Insert a USB-A flash drive into your computer.</li>
+					
+				<li>Use File Explorer to name the flash drive &#39;MYDATA&#39;</li>
+				
+				<li>Use Notepad to create a file named &#39;chatgpt.txt&#39; in the root of the flash drive.&nbsp;<br />
+					The file, on line 1, must contain your ChatGPT API key.<br />
+					There should be nothing else in the file.<br />	
+					Save the file.
+				</li>
+
+				
+				<li>
+					Eject the flash drive from your computer.
+				</li>
+
+				<li>
+					Insert the flash drive containing chatgpt.txt into the Rasbperry Pi.<br />
+				</li>
+
+
+
 				<li>These steps are performed on the Raspberry Pi.</li>
 
 				<li>
@@ -186,7 +212,7 @@ function copy_code(event) {
 				</li>
 
 				<li>
-					Move into that directory with the following command:<br />
+					Enter that directory by typing the following command:<br />
 					<code>
 						cd ~/openai
 					</code>
@@ -204,24 +230,36 @@ function copy_code(event) {
 					Open Thonny on your Raspberry Pi.
 				</li>
 
-				<li>Enter the following code, or transfer chatgpt.py to your Raspberry pi, and<br />
-					save the file chatgpt.py to the folder:<br />
+				<li>Enter the following Python code, chatgpt.py <br />
+					Save the file to the USB flash drive, the path will be:<br />
+					<code>
+						<strong>
+							/media/pi/MYDATA/chatgpt.py
+						</strong>
+					</code>
+					<br />
+					<br />
+					Optionally you can save chatgpt.py to your Raspberry pi in the folder:<br />
 					<code>
 						<strong>home/pi/openapi</strong>
 					</code>
+					<br />
+
+
+					
 
 
 
 <div id="pcode">
 
     <br /><br />
-    <button onclick="copy_code(event)">Copy Python Code</button>
+    <button onclick="copy_code(event)">Copy Python Code chatgpt.py</button>
     <br /><br />
 
 
 <pre> <code>
 
-#PgP 2/10/2024 chatGPT API call from PiMyLifeUp article
+#PgP 2/10/2024 chatgpt.py  API call from PiMyLifeUp article
 # https://pimylifeup.com/raspberry-pi-chatgpt/
 # modified to add USB flash drive to contain chatGPT API key
 # need to have billing setup to get this to run
@@ -281,14 +319,6 @@ while True:
 
 				</li>
 
-				<li>Make sure that you have a USB-A flash drive, named &#39;MYDATA&#39; that contains the file &#39;chatgpt.txt&#39; in the root.&nbsp;<br />
-					The file, line 1, must contain your ChatGPT API key.<br />
-					There should be nothing else in the file.<br />
-					
-				</li>
-
-				<li>Insert the flash drive containing chatgpt.txt into the Rasbperry Pi.<br />
-				</li>
 
 				<li>Run the code, you should be asked to type in a prompt.<br />
 						<a href="../IOT27/images/chatgptAPI.PNG" class="img-responsive img-rounded" target="popup" onclick="window.open('images/chatgptAPI.PNG', 'popup'); return false;">
