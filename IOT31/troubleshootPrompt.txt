@@ -1,0 +1,125 @@
+PgP 7/31/2024 all this was fixed. turns out that www-data did not have adequate permissions for running nmap-nmap ran, but did not return MAC address-until I elevated www-data privileges in the findpi_cgi.py script.  Now all works well...
+chat gpt was not real helpful. I figured it was a permissions problem. what helped was running the scan against a much smaller set of computers, so the output file was smaller, then I noticed the MAC addresses were not being returned.
+will create IOT31 for cgi-bin scripts
+
+
+
+please provide an explanation of why the following Python 3.7 program runs correctly under some conditions, but not others.
+
+Here is the contents of the station.txt file:
+station,mac,ip
+79,B8:27:EB:9B:62:77,UnitOffline
+208,B8:27:EB:17:AB:BC,UnitOffline
+209,B8:27:EB:42:FE:E9,UnitOffline
+137,B8:27:EB:1F:D4:3E,UnitOffline
+78,B8:27:EB:CE:37:22,UnitOffline
+
+here is the program, /usr/lib/cgi-bin/iplistmin.py    run on a Raspberry Pi running Debian Linux Buster.
+
+#!/usr/bin/env python3
+# PgP 7/29/2024 trying to figure out why ip_list part not working
+
+import time
+import sys
+import os
+import csv
+import subprocess
+from datetime import datetime
+import re
+
+#print(os.environ)   #PgP 7/29/2024 troubleshooting
+
+# Print the HTTP header
+print("Content-type: text/html\n\n")
+
+# Get the current date and time
+current_datetime = time.strftime("Started at: %Y-%m-%d %H:%M:%S")
+
+# Record start time
+start_time = time.time()
+
+#step 1: read station.txt into a list
+rows=[]
+with open('/usr/lib/cgi-bin/station.txt', 'r') as csvfile:
+    reader = csv.DictReader(csvfile)
+    for row in reader:
+        rows.append(row)
+
+print('rows: ')
+print(rows)   #troubleshooting 7/29/2024
+
+
+# Step 2: Update IP addresses using nmap
+
+nmap_output = subprocess.run(['nmap', '-T4', '-p', '5900', '192.168.1.78', '192.168.1.137', '192.168.1.209'], capture_output=True, text=True)
+
+ip_list = []
+print(nmap_output)  #PgP debug 3/17/2023
+
+for line in nmap_output.stdout.split('\n'):
+    if 'Starting Nmap' in line:
+        nmap_start = line
+    elif 'Nmap scan report' in line:
+        #ip = line.split()[4]  #replace by regular expression in case machine name appears in output PgP 3/17/2023
+        ip_pattern = r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}"
+        match = re.search(ip_pattern, line)
+        if match:
+            ip = match.group(0)
+        else:
+            ip = "no ip found"
+        try:
+            row = next(row for row in rows if row['ip'] == ip)
+            station = int(row['station'])
+        except StopIteration:
+            station = 0
+    elif 'MAC Address' in line:
+        mac = line.split()[2]
+        if mac.startswith('B8:27:EB'):
+            for row in rows:
+                if row['mac'].upper() == mac:
+                    row['ip'] = ip
+                    station = int(row['station'])
+                    break
+            else:
+                station = 0
+            ip_list.append((ip, mac, station))
+
+print('ip list') # trouble shooting
+print(ip_list)   # PgP 7/29/2024 trouble shooting
+
+# end of Step 2
+
+quit()
+
+# end of program
+
+
+
+when run with the command: ' sudo python3 /usr/lib/cgi-bin/iplistmin.py ' the program produces the correct rows nmap scan output, and the correct values for iplist[]:
+Content-type: text/html
+
+
+rows: 
+[OrderedDict([('station', '79'), ('mac', 'B8:27:EB:9B:62:77'), ('ip', 'UnitOffline')]), OrderedDict([('station', '208'), ('mac', 'B8:27:EB:17:AB:BC'), ('ip', 'UnitOffline')]), OrderedDict([('station', '209'), ('mac', 'B8:27:EB:42:FE:E9'), ('ip', 'UnitOffline')]), OrderedDict([('station', '137'), ('mac', 'B8:27:EB:1F:D4:3E'), ('ip', 'UnitOffline')]), OrderedDict([('station', '78'), ('mac', 'B8:27:EB:CE:37:22'), ('ip', 'UnitOffline')])]
+CompletedProcess(args=['nmap', '-T4', '-p', '5900', '192.168.1.78', '192.168.1.137', '192.168.1.209'], returncode=0, stdout='Starting Nmap 7.70 ( https://nmap.org ) at 2024-07-30 08:40 CDT\nNmap scan report for raspberrypi.home (192.168.1.78)\nHost is up (0.00027s latency).\n\nPORT     STATE SERVICE\n5900/tcp open  vnc\n\nNmap scan report for 192.168.1.137\nHost is up (0.00066s latency).\n\nPORT     STATE SERVICE\n5900/tcp open  vnc\nMAC Address: B8:27:EB:1F:D4:3E (Raspberry Pi Foundation)\n\nNmap scan report for 192.168.1.209\nHost is up (0.00069s latency).\n\nPORT     STATE SERVICE\n5900/tcp open  vnc\nMAC Address: B8:27:EB:17:AB:BC (Raspberry Pi Foundation)\n\nNmap done: 3 IP addresses (3 hosts up) scanned in 1.20 seconds\n', stderr='')
+ip list
+[('192.168.1.137', 'B8:27:EB:1F:D4:3E', 137), ('192.168.1.209', 'B8:27:EB:17:AB:BC', 208)]
+
+
+when run with the command: ' sudo -u www-data /usr/lib/cgi-bin/iplistmin.py ' it produces the correct rows, nmap scan output, but the iplist[] is empty:
+Content-type: text/html
+
+
+rows: 
+[OrderedDict([('station', '79'), ('mac', 'B8:27:EB:9B:62:77'), ('ip', 'UnitOffline')]), OrderedDict([('station', '208'), ('mac', 'B8:27:EB:17:AB:BC'), ('ip', 'UnitOffline')]), OrderedDict([('station', '209'), ('mac', 'B8:27:EB:42:FE:E9'), ('ip', 'UnitOffline')]), OrderedDict([('station', '137'), ('mac', 'B8:27:EB:1F:D4:3E'), ('ip', 'UnitOffline')]), OrderedDict([('station', '78'), ('mac', 'B8:27:EB:CE:37:22'), ('ip', 'UnitOffline')])]
+CompletedProcess(args=['nmap', '-T4', '-p', '5900', '192.168.1.78', '192.168.1.137', '192.168.1.209'], returncode=0, stdout='Starting Nmap 7.70 ( https://nmap.org ) at 2024-07-30 08:37 CDT\nNmap scan report for raspberrypi.home (192.168.1.78)\nHost is up (0.00091s latency).\n\nPORT     STATE SERVICE\n5900/tcp open  vnc\n\nNmap scan report for 192.168.1.137\nHost is up (0.0014s latency).\n\nPORT     STATE SERVICE\n5900/tcp open  vnc\n\nNmap scan report for 192.168.1.209\nHost is up (0.0011s latency).\n\nPORT     STATE SERVICE\n5900/tcp open  vnc\n\nNmap done: 3 IP addresses (3 hosts up) scanned in 0.24 seconds\n', stderr='')
+ip list
+[]
+  
+is there a problem with the program iplistmin.py, or is there a problem with permissions for www-data?
+
+
+
+
+
+
