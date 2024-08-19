@@ -22,6 +22,38 @@
 </head>
 
 <body onload="setVariables()">
+
+
+            <hr />
+ <!-- The bookmark named 'calculator' -->
+    <h2 id="calculator">Enter Your Station </h2>    <label for="stationInput">Somsen 301 station number:</label>
+    <input type="number" id="stationInput" value="5" />
+    
+    <button onclick="calculateConnection()">Calculate Connected Station</button>
+    
+    <h3>Target Station: <span id="resultLabel"></span></h3>
+
+    <script>
+        function calculateConnection() {
+            // Get the station number from the input
+            let stationNumber = parseInt(document.getElementById('stationInput').value);
+
+            // Calculate the connected station using the formula
+            let connectedStation = ((stationNumber + 12 - 1) % 38) + 1;
+
+            // Display the result in the label
+            document.getElementById('resultLabel').textContent = connectedStation;
+        }
+    </script>
+
+
+            <hr />
+
+
+
+
+
+
     <form class="container-fluid" action="https://eprofessor.azurewebsites.net/code/ProcessFormData.asp" method="post" name="frmAssignment" id="frmAssignment">
 
         <input name="InstID" type="hidden" id="InstID" value="00617282" />
@@ -91,7 +123,8 @@
 
             <p>
                 These exercises will guide you through the process of gathering Raspberry Pi sensor data in a MySQL/Maria database server on the Raspberry Pi.<br />
-                Then you will use Microsoft Access to link over a network connection to the MySQL/Maria database to view this data.<br />
+                Then you will use 
+                a web browser to link over a network connection to the phpMyAdmin application on a remote Raspberry Pi to run a SQL statement to retrieve specific data.<br />
                 <br />
 
                 More information on setting up <a href="https://pimylifeup.com/raspberry-pi-mysql/" class="bg-info text-white" target="_blank">MySQL</a> is available online.<br />
@@ -99,9 +132,9 @@
             </p>
             <p>After completing this assignment you will be able to:</p>
             <ol>
-                <li>Write Python code to collect Raspberry Pi sensor data</li>
-                <li>Write Python code to insert sensor data into MySQL database</li>
-                <li>Use Microsoft Access on a network to view stored sensor data on a MySQL database on a Raspberry Pi </li>
+                <li>Connect to remote Raspberry Pi&nbsp; to view MySQL sensor data</li>
+                <li>Use phpMyAdmin to view a remote MySQL database</li>
+                <li>Compose SQL statements to answer specific questions. </li>
             </ol>
             <hr />
         </div>
@@ -116,7 +149,7 @@
             <h3>Prerequisites
             </h3>
 
-            Before doing this assignment review <a href="../IOT10/IOT10.html" class="bg-info text-white" target="_blank">IOT10</a>- MySQL on Raspberry Pi, and <a href="../IOT20/IOT20.html" class="bg-info text-white" target="_blank">IOT20</a>-Linking Microsoft Access to MySQL using ODBC. 
+            Before doing this assignment review <a href="../IOT10/IOT10.html" class="bg-info text-white" target="_blank">IOT10</a>- MySQL on Raspberry Pi, <a href="../IOT20/IOT20.html" class="bg-info text-white" target="_blank">IOT20</a>-Linking Microsoft Access to MySQL using ODBC, and <a href="../IOT21/IOT21.html">IOT21</a>-Sensor Data to MySQL. 
             <br />
 
             You must be using a Raspberry Pi that has the following installed and configured:<br />
@@ -151,29 +184,78 @@
                 &nbsp;
             </p>
             <p>
-                9/10/22-rough outline
+                8/19/24-rough outline
             </p>
+
             <p>
-                1. make sure you can collect DHT data from Raspberry Pi
-            </p>
-            <p>
-                2. make sure you can write data to MySQL database<br />
-                You may need to install the Python mysql library using the command:<br />
-                <code>sudo pip3 install mariadb==1.0.11</code>
-                <br />
-                You may need to install dependcies for mariadb using the command:<br />
-                <code>sudo apt install libmariadb3 libmariadb-dev
-                </code>
-            </p>
-            <p>
-                3. make sure you can read data from mariad database-both throught CLI on RPi/MySQL and Microsoft Access via ODBC to MySQL<br />
-                You may need to create the MySQL/mariadb database 'sensor' and create the 'dht' table using the 'dht.sql' file<br />
-                run the following command in MySQL, once you transfer 'dht.sql' to the 'IoT_Files' folder on the Raspberry Pi:<br />
-                <code>source /home/pi/Desktop/IoT_Files/dht.sql</code>
+                1. Determine the remote Raspberry Pi to connect via VNC.<br />
+                Refer to the <a href="#calculator">Calculator</a> at the top of this assignment.
 
             </p>
+
+
             <p>
-                &nbsp;
+                2. Determine the IP address of the station you will connect to.<br />
+                Use the ip_list.html page on any Raspberry Pi in Somsen 301.<br />
+
+                Or go look at the station and find the IP address in the upper right hand corner of the desktop:<br />
+
+            </p>
+
+            
+                                <p>
+                                    <a href="images/ipList.PNG" class="img-responsive img-rounded" target="popup" onclick="window.open('images/ipList.PNG', 'popup'); return false;">
+                                        <img src="images/ipList.PNG" width="200" alt="IP List" class="img-responsive img-responsive" /></a>IP List of Addresses<br />
+                                </p>
+
+            
+                                <p>
+                                    <a href="images/ipAddress.PNG" class="img-responsive img-rounded" target="popup" onclick="window.open('images/ipAddress.PNG', 'popup'); return false;">
+                                        <img src="images/ipAddress.PNG" width="200" alt="IP Address" class="img-responsive img-responsive" /></a>IP Address<br />
+                                </p>
+
+
+
+            <p>
+                3. use a web browser to connect to the your Target Station at <code>
+                    http://10.19.x.x/
+                                                                              </code><br />
+                The page that appears will show the 25 most recent data points.<br />
+                Check to make sure the data appears reasonable.<br />
+                Check that the most recent data is no more than 30 minutes old<br />
+                Why are you doing this?
+                </p>
+                                <p>
+                                    <a href="images/SensorDataOnWeb.PNG" class="img-responsive img-rounded" target="popup" onclick="window.open('images/SensorDataOnWeb.PNG', 'popup'); return false;">
+                                        <img src="images/SensorDataOnWeb.PNG" width="200" alt="Sensor Data" class="img-responsive img-responsive" /></a>Sensor Data<br />
+                                </p>           
+            
+            
+            <p> 4. Once you are sure the data appears reasonable and the target Rasbperry Pi is working corrrectly, next connect to the Target Station's instance of phpMyAdmin.<br />
+                Open a web browser to:<br />
+                <code>
+                    http://TargetIP/phpmyadmin
+                </code>
+                <br />
+                The username and password are on the Raspberry Pi Desktop.<br />
+
+            </p>
+
+            <p>
+                5. Login to phpMyAdmin, then go to the 'sensor' database and open the 'GroveSensors' table.<br />
+                Make sure you can see data in the 'GroveSensors' table<br />
+                Then click on the 'SQL' tab:                
+
+            </p>
+
+
+
+            <p>
+                                <p>
+                                    <a href="images/phpMyAdmin_SQL_view.PNG" class="img-responsive img-rounded" target="popup" onclick="window.open('images/phpMyAdmin_SQL_view.PNG', 'popup'); return false;">
+                                        <img src="images/phpMyAdmin_SQL_view.PNG" width="200" alt="phpMyAdmin Data" class="img-responsive img-responsive" /></a>phpMyAdmin Sensor Data<br />
+                                </p>           
+            
             </p>
 
             <hr />
@@ -184,236 +266,22 @@
 
         <!--Exercise 1-->
 
-        <div class="col-lg-12"><a href="#Exercise01" class="btn btn-info" data-toggle="collapse">Exercise 1-Code Review</a><a href="#Exercise01"></a></div>
+        <div class="col-lg-12"><a href="#Exercise01" class="btn btn-info" data-toggle="collapse">Exercise 1-SQL Code </a><a href="#Exercise01"></a></div>
 
         <div id="Exercise01" class="collapse in  col-lg-12">
 
 
 
 
-            <p>Review the code that reads the sensor data and writes it to the MySQL/MariaDB database.</p>
+            <p>Using phpMyAdmin, write a SQL statement that will return the complete record with the maximum temperature that the target station has encountered.<br />
+                Enter your SQL statement below.<br />
+                
+                
+                
+                
+                the code that reads the sensor data and writes it to the MySQL/MariaDB database.</p>
 
 
-            <ol>
-
-                <li>These steps are performed on the Raspberry Pi</li>
-
-                <li>Open Thonny and load the <code>insert.py</code> program with is located on the Desktop in the &#39;IoTFiles&#39; folder.
-
-
-                                <p>
-                                    <a href="images/insert.PNG" class="img-responsive img-rounded" target="popup" onclick="window.open('images/insert.PNG', 'popup'); return false;">
-                                        <img src="images/insert.PNG" width="200" alt="code to insert sensor record" class="img-responsive img-responsive" /></a>Python Code to Insert Database Record<br />
-                                </p>
-                </li>
-
-                <li>Review the code</li>
-
-                <li>Line 22 reads the sensor data<br />
-                    <code>[temp,hum] = dht(dht_sensor_port,dht_sensor_type)    # read DHT11 sensor data</code>
-                </li>
-
-                <li>Line 28 contains the SQL INSERT clause with the formatted sensor data, and adds a timestamp.<br />
-                    <code>[temp,hum] = dht(dht_sensor_port,dht_sensor_type)    # ready DHT11 sensor data </code>
-                </li>
-
-                <li>Line 31 sends the sensor data to the MySQL table dht, then line 32 commits these changes.
-                    <br />
-                    <code>[temp,hum] = dht(dht_sensor_port,dht_sensor_type)    # ready DHT11 sensor data  </code>
-                    <br />
-                    <code>mydb.commit() </code>
-                </li>
-
-                <li>Reflect on the purpose of lines 34 and 35.
-                    <br />
-                    <code>print("Temp:  ", temperature, "Humidity: ",humidity, "Time: ",timestamp)  </code>
-                    <br />
-                    <code>time.sleep(60)    # pause a minute     </code>
-                </li>
-
-                <li>The Raspberry Pi appears to be running the insert.py program to send data to the  MySQL/Maria database server correctly.<br />
-                    Next, check to make sure that the data is actually being inserted into the database.
-                </li>
-
-
-            </ol>
-
-            <hr />
-
-        </div>
-
-
-
-
-
-
-        <!--Exercise 2-->
-
-
-        <div class="col-lg-12"><a href="#Exercise02" class="btn btn-info" data-toggle="collapse">Exercise 2-Write to MySQL</a></div>
-
-        <div id="Exercise02" class="collapse in  col-lg-12">
-
-            <p>These steps are performed on the Raspberry Pi. </p>
-
-            <ol>
-                <li>Open a Terminal window and enter the following commands <b>to log into the MySQL instance, noting that the default password is blank</b>:<br />
-                    <code>sudo mysql -u root -p -h localhost</code><br />
-                    Press Enter when prompted for the password.<br />
-
-                </li>
-
-                <li>Type the following command in MySQL to mount the sensor database:
-                    <br />
-                    <code>use sensor;
-                    </code>
-                    <br />
-                    If database sensor does not exist use phpmyadmin to create the database using Collation = 'utf8mb4_general_ci'
-                    <br />
-
-
-                </li>
-
-                <li>Type the following MySQL command to view the contents of the dht table:
-                    <br />
-                    <code>SELECT * from dht; </code>
-                    <br />
-
-                    <a href="images/sensorData.PNG" class="img-responsive img-rounded" target="popup" onclick="window.open('images/sensorData.PNG', 'popup'); return false;">
-                        <img src="images/sensorData.PNG" width="300" alt="sensor data" class="img-responsive img-responsive" /></a> MySQL Sensor Data<br />
-                    <br />
-                    Note: if table 'dht' does not exist use place the file 'dht.sql' into the RPi /home/pi/Desktop/IoT_Files folder and run the following command in mySQL:
-                    <br />
-                    <code>SOURCE /home/pi/Desktop/IoT_Files/dht.sql
-                    </code>
-                    <br />
-
-
-                </li>
-
-                <li>Examine the output, reflecting on the importance of the recordID and timestamp fields and the data they contain.
-                </li>
-
-
-
-
-                <li>Consider what will happen as more records are added to the dht table.<br />
-                    Can you create a SQL statement that will display the most recent record first? </li>
-
-                <li>It appears that sensor data is being added to the database.<br />
-                    Next, make sure you can share this sensor data with another computer on the network running Microsoft Access.
-                </li>
-
-            </ol>
-
-            <hr />
-
-        </div>
-
-
-
-
-
-
-        <!--Exercise 3-->
-
-
-        <div class="col-lg-12"><a href="#Exercise03" class="btn btn-info" data-toggle="collapse">Exercise 3-Connect With ODBC</a></div>
-
-        <div id="Exercise03" class="collapse in  col-lg-12">
-
-            <p>
-                These steps are performed on your computer.
-            </p>
-
-
-
-
-
-            <p>
-                In IOT20 you installed and configured the 64-bit MySQL ODBC 8 ANSI driver.<br />
-                Now you will make use of ODBC to link your Windows computer to the MySQL database on the Raspberry Pi.
-            </p>
-
-            <p>This exercise demonstrates how to share data from a Raspberry Pi with other computers over a network.</p>
-
-            <ol>
-
-                <li>If the ODBC driver has not been installed, please go back to IOT20 and follow the instrucitons.</li>
-
-
-                <li>To verify that the ODBC drive is installed, click Start, type in 'ODBC', find the 64-bit version and click to start.</li>
-
-
-
-
-
-
-                <li>Under the User DSN tab, select the MySQL ODBC Data Source, click &#39;Configure&#39;<br />
-                    Note your data source name may be different<br />
-                    Enter your Raspberry Pi IP address (get it from VNC), enter the following information for user, password, database:<br />
-                    Username: <code>user</code>
-                    <br />
-                    Password: <code>user</code>
-                    <br />
-                    Database: <code>sensor</code>
-                    <br />
-                    Press the &#39;Test&#39; button
-                    <br />
-
-                    <p>
-                        <a href="images/ODBCtest_Unicode.PNG" class="img-responsive img-rounded" target="popup" onclick="window.open('images/ODBCtest_Unicode.PNG', 'popup'); return false;">
-                            <img src="images/ODBCtest_Unicode.PNG" width="300" alt="ODBC test" class="img-responsive img-responsive" /></a> ODBC Test<br />
-
-                    </p>
-                </li>
-
-                <li>If your connection test is not successful troubleshoot and correct the problem.
-                </li>
-
-                <li>Open Microsoft Access and create a new blank database.  
-                    <br />
-
-                    Save the database  as &quot;sensor&quot; in your ' 
-             <code><span id="axbPath"></span></code>
-                    <script>document.getElementById("axbPath").innerHTML = Path; </script>
-                    ' folder.<br />
-                </li>
-
-
-                <li>From the Access menu choose External Data&gt;New Data Source&gt; From Other Sources&gt;ODBC Database:<br />
-                    Choose the second option to 'Link to the datsource by creating a linked table'</li>
-
-                <li>In the &#39;Select Data Source&#39; dialog box choose the tab &#39;Machine Data Source&#39; and select the connection to the sensor database.
-                    <br />
-                    <a href="images/dataSource.PNG" class="img-responsive img-rounded" target="popup" onclick="window.open('images/dataSource.PNG', 'popup'); return false;">
-                        <img src="images/dataSource.PNG" width="300" alt="data source" class="img-responsive img-responsive" /></a> Select Data Source<br />
-
-                </li>
-
-
-                <li>In the &#39;Link Tables&#39; dialog box select the table dht then press OK.<br />
-                    <a href="images/linkTables.PNG" class="img-responsive img-rounded" target="popup" onclick="window.open('images/linkTables.PNG', 'popup'); return false;">
-                        <img src="images/linkTables.PNG" width="300" alt="link table dht" class="img-responsive img-responsive" /></a> Linking the dht table</li>
-
-
-                <li>In the &#39;Navigation Pane&#39; double-click the table &#39;dht&#39; to open it and view the linked data.<br />
-                    <a href="images/linkedData.PNG" class="img-responsive img-rounded" target="popup" onclick="window.open('images/linkedData.PNG', 'popup'); return false;">
-                        <img src="images/linkedData.PNG" width="300" alt="linked data" class="img-responsive img-responsive" /></a> Viewing Linked dht table</li>
-
-
-                <li>Use Access to display the dht table, and VNC to display the MySQL database query results from <code>SELECT * FROM dht;</code>
-                    <br />
-
-
-                    <a href="images/dataView.PNG" class="img-responsive img-rounded" target="popup" onclick="window.open('images/dataView.PNG', 'popup'); return false;">
-                        <img src="images/dataView.PNG" width="300" alt="viewing data" class="img-responsive img-responsive" /></a> Viewing Data Two Ways<br />
-
-                    Take a screenshot showing both views of the data<br />
-
-                </li>
-
-            </ol>
 
             <hr />
 
@@ -437,8 +305,12 @@
                 These steps are done on your laptop using Microsoft Access and VNC.
             </p>
 
+                                <p>
+                                    <a href="images/sql.PNG" class="img-responsive img-rounded" target="popup" onclick="window.open('images/sql.PNG', 'popup'); return false;">
+                                        <img src="images/sql.PNG" width="200" alt="phpMyAdmin SQL Data" class="img-responsive img-responsive" /></a>phpMyAdmin SQL Data<br />
+                                </p>           
             <ol>
-                <li>Save your screenshot of the Raspberry Pi MySQL sensor database displaying records from the dht table, along with the linked Access table showing the same information.<br />
+                <li>Save your screenshot of the Raspberry Pi MySQL sensor database displaying records from the GroveSensors table, along with the linked Access table showing the same information.<br />
                     Note: this can be done using the Snipping Tool.
                 </li>
 
@@ -472,7 +344,7 @@
 
         <div class="col-lg-12 text-primary">
             <p>
-                (50) 1. Upload your screenshot to the &#39;IOT21&#39; D2L Assignment Folder.
+                (50) 1. Upload your screenshot to the &#39;IOT25&#39; D2L Assignment Folder.
             </p>
             <hr />
         </div>
