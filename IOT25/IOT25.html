@@ -124,7 +124,7 @@
             <p>
                 These exercises will guide you through the process of gathering Raspberry Pi sensor data in a MySQL/Maria database server on the Raspberry Pi.<br />
                 Then you will use 
-                a web browser to link over a network connection to the phpMyAdmin application on a remote Raspberry Pi to run a SQL statement to retrieve specific data.<br />
+                a web browser and connect to the phpMyAdmin application on a remote Raspberry Pi to run a SQL statement to retrieve specific data.<br />
                 <br />
 
                 More information on setting up <a href="https://pimylifeup.com/raspberry-pi-mysql/" class="bg-info text-white" target="_blank">MySQL</a> is available online.<br />
@@ -134,7 +134,7 @@
             <ol>
                 <li>Connect to remote Raspberry Pi&nbsp; to view MySQL sensor data</li>
                 <li>Use phpMyAdmin to view a remote MySQL database</li>
-                <li>Compose SQL statements to answer specific questions. </li>
+                <li>Use phpMyAdmin to submit SQL statements to answer specific questions. </li>
             </ol>
             <hr />
         </div>
@@ -155,7 +155,7 @@
             You must be using a Raspberry Pi that has the following installed and configured:<br />
 
             <ol>
-                <li>Maria/MySQL database (using mariadb, so install required mariadb connector</li>
+                <li>Maria/MySQL database (using mariadb, so install required mariadb ODBC Unicode connector)</li>
                 <li>phpMyAdmin</li>
                 <li>GrovePi, Raspberry Pi with DHT11 temperature and humidity sensor</li>
             </ol>
@@ -164,7 +164,7 @@
 
             <ol>
                 <li>Microsoft Access</li>
-                <li>MySQL ODBC 8 ANSI driver (see <a href="../IOT20/IOT20.html" class="bg-info text-white" target="_blank">IOT20</a>)</li>
+                <li>MySQL ODBC 8 Unicode driver (see <a href="../IOT20/IOT20.html" class="bg-info text-white" target="_blank">IOT20</a>)</li>
 
             </ol>
 
@@ -183,9 +183,9 @@
             <p>
                 &nbsp;
             </p>
-            <p>
-                8/19/24-rough outline
-            </p>
+            <h2>
+                Outline
+            </h2>
 
             <p>
                 1. Determine the remote Raspberry Pi to connect via VNC.<br />
@@ -217,14 +217,17 @@
 
 
             <p>
-                3. use a web browser to connect to the your Target Station at <code>
+                3. Use a web browser to connect to the your Target Station at <code>
                     http://10.19.x.x/
                                                                               </code><br />
                 The page that appears will show the 25 most recent data points.<br />
                 Check to make sure the data appears reasonable.<br />
                 Check that the most recent data is no more than 30 minutes old<br />
                 Why are you doing this?
-                </p>
+                To make sure the target station is working properly.<br />
+                If your target station is not working, either troubleshoot it or select another station to connect to.<br />
+                Do NOT connect to the same Raspberry Pi on the same station as you are using for this assignment.<br />
+            </p>
                                 <p>
                                     <a href="images/SensorDataOnWeb.PNG" class="img-responsive img-rounded" target="popup" onclick="window.open('images/SensorDataOnWeb.PNG', 'popup'); return false;">
                                         <img src="images/SensorDataOnWeb.PNG" width="200" alt="Sensor Data" class="img-responsive img-responsive" /></a>Sensor Data<br />
@@ -237,7 +240,7 @@
                     http://TargetIP/phpmyadmin
                 </code>
                 <br />
-                The username and password are on the Raspberry Pi Desktop.<br />
+                The phpMyAdmin username and password are on the Raspberry Pi Desktop.<br />
 
             </p>
 
@@ -270,23 +273,56 @@
 
         <div id="Exercise01" class="collapse in  col-lg-12">
 
+            <p>Use the 'sensor' database; 'GroveSensors' table to answer the following questions.</p>
 
+               <div class="col-lg-12 text-primary">
 
-
-            <p>Using phpMyAdmin, write a SQL statement that will return the complete record with the maximum temperature that the target station has encountered.<br />
+            (50) 1. Using phpMyAdmin, write a SQL statement that will return the complete record th the maximum temperature that the target station has encountered since it began taking data.<br />
                 Enter your SQL statement below.<br />
-                
-                
-                
-                
-                the code that reads the sensor data and writes it to the MySQL/MariaDB database.</p>
+              
+            
+
+                <!-- Enter your answer in the VALUE field below   GROK -->
+                <input class="form-control" name="q1" type="text" id="q1" value="max temp:" />
+                <hr />
+            </div>
+
+
+
+            <hr />
+               <div class="col-lg-12 text-primary">
+
+            (50) 2. Using phpMyAdmin, write a SQL statement that will return the maximum 'Humidity' value and the date/time that it occurred.<br />
+                Enter your SQL statement below.<br />
+              
+            
+
+                <!-- Enter your answer in the VALUE field below   GROK -->
+                <input class="form-control" name="q2" type="text" id="q2" value="max temp:" />
+                <hr />
+            </div>
 
 
 
             <hr />
 
-        </div>
+            <hr />
+               <div class="col-lg-12 text-primary">
 
+            (50) 3. Using phpMyAdmin, write a SQL statement that will return the number of records in the 'GroveSensors' table.<br />
+                Enter your SQL statement below.<br />
+              
+            
+
+                <!-- Enter your answer in the VALUE field below   GROK -->
+                <input class="form-control" name="q3" type="text" id="q3" value="num records:" />
+                <hr />
+            </div>
+
+
+
+
+                   </div>
 
 
 
