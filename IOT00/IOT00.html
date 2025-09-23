@@ -308,22 +308,31 @@
             <p>
                 The IoT workstations have worked well since Fall 2019, but occasionally problems arise.
                 <br />
-                The following is a list of potential problems, and what action to take.<br />
+                The following is a list of potential problems, and action to take.<br />
 
             </p>
 
 
 
             <ul>
-                <li>Issue:  Yellow lightning bolt or message in the upper right corner.<br />
-                    Problem: Low voltage detected.<br /> </li>
+                <li>Grove Sensor readings out of range or out of date</li>
+                <li>Issue:  table data contains large numbers.<br />
+                    Problem: sensors not read correctly.<br /> </li>
                     <li>Solution: Notify TA or professor. </li>
-                    <li>
-                    The Raspberry Pi requires 5 volts DC. <br />
-                    If the voltage drops below 4.65 volts DC the alert is triggered.
-                </li>
             </ul>
 
+            <p>
+                <a href="images/RPi_SensorProblem.png" class="img-responsive img-rounded" target="popup" onclick="window.open('images/RPi_SensorProblem.png', 'popup'); return false;">
+                    <img src="images/RPi_SensorProblem.png" width="300" alt="Sensor Problem" class="img-responsive img-responsive" />
+                </a>
+                <br />
+                Figure 5A-Bad Sensor Data<br />
+
+                Most recent Sensor Data should be within the last half hour. <br />
+                Sensor readings are taken on the hour and half-hour<br />
+                Bad sensor data can be caused by many different problems-bad hardware, bad web server, bad database....<br />
+
+            </p>
 
 
 
@@ -334,8 +343,18 @@
                     <img src="images/lowvolt.PNG" width="300" alt="low voltage warning" class="img-responsive img-responsive" />
                 </a>
                 <br />
-                Figure 5-Low Voltage Warning
+                Figure 5B-Low Voltage Warning
             </p>
+
+            <ul>
+                <li>Issue:  Yellow lightning bolt or message in the upper right corner.<br />
+                    Problem: Low voltage detected.<br /> </li>
+                    <li>Solution: Notify TA or professor. </li>
+                    <li>
+                    The Raspberry Pi requires 5 volts DC. <br />
+                    If the voltage drops below 4.65 volts DC the alert is triggered.
+                </li>
+            </ul>
 
             <br />
 
